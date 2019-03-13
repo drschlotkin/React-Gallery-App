@@ -8,8 +8,8 @@ body {
 h2 {
   font-size: 2.8em;
   margin: 12px 0 40px;
-  color:rgb(255, 198, 128)
-  
+  /* color:rgb(255, 198, 128) */
+  /* color:rgb(255, 180, 88); */
 }
 
 p{
@@ -159,6 +159,18 @@ input:focus {
 
 /* Styles I added */
 
+.error-container{
+  margin-bottom: 5em;
+}
+
+.error{
+  border-radius: 25px;
+  box-shadow: 10px 10px 5px #3f4850;
+    -moz-box-shadow: 10px 10px 5px #3f4850;
+    -webkit-box-shadow: 10px 10px 5px #3f4850;
+    -khtml-box-shadow: 10px 10px 5px #3f4850;		
+}
+
 .background-image{
   background-image:url('../images/cool-wallpaper-dawn-dusk-66997.jpg');
   background-repeat: no-repeat;
@@ -180,7 +192,6 @@ input[type=search] {
 }
 
 .photo-container{
-  /* margin-top: 70px; */
   margin-top: 5em;
 }
 

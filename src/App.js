@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Route} from 'react-router-dom'
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
 import Header from './Components/Header';
-import Gallery from './Components/Gallery';
+import NotFound from './Components/NotFound';
 import key from './Components/config.js';
 
 export default class App extends Component {  
@@ -16,14 +16,14 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    this.performSearch(); 
+    document.body.classList.add('background-image');
+    this.performSearch();  
   };
 
-  performSearch = (query = 'mosquito') => {
+  performSearch = (query) => {
     fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => response.json())
     .then(responseData => {
-      document.body.classList.add('background-image');
       this.setState({
         gifs: responseData.photos.photo,
         loading: false,
@@ -41,16 +41,33 @@ export default class App extends Component {
     return (
       <BrowserRouter>
         <div className="container">
-          <Header displayResults={this.performSearch}/>
+        <Switch>
+          <Route exact path="/" render={() =>  <Redirect to="/mosquito" />}/>       
           
-          <Route path="/" render= {() => 
+          <Route path="/mosquito" render= {() => 
             (this.state.loading)
-            ? <p>Loading...</p>
-            : <Gallery data={this.state.gifs} title={this.state.query}/>
-          }
-          />
-          {/* <Route path="/jellyfish" render={props=> <Gallery data={props} title={'jelly fish'}/> } /> */}
-           
+            ? <h1>Loading...</h1>
+            : <Header title="mosquito" pictures={this.state.gifs} displayResults={this.performSearch('mosquito')}/>
+          }/>
+
+          <Route path="/jellyfish" render= {() => 
+            (this.state.loading)
+            ? <h1>Loading...</h1>
+            : <Header title="Jelly Fish" pictures={this.state.gifs} displayResults={this.performSearch('jellyfish')}/>
+          }/>
+
+          <Route path="/humans" render= {() => 
+            (this.state.loading)
+            ? <h1>Loading...</h1>
+            : <Header title="Humans" pictures={this.state.gifs} displayResults={this.performSearch('humans')}/>
+          }/>
+
+          <Route path='/search' render={() => 
+            <Header title="Search" pictures={this.state.gifs} displayResults={(query) => this.performSearch(query)}/>
+          }/>
+        
+        <Route component={NotFound} />
+        </Switch>
         </div>
       </BrowserRouter>
     );

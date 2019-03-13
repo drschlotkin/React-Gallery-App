@@ -2,17 +2,16 @@ import React from 'react';
 import GalleryItem from './GalleryItem';
 import NoGifs from './noGIFs';
 
-const Gallery = props => {   
-  
-  const results = props.data;
-  const length = results.length;
-  let gifs;
+const Gallery = ({pictures, title}) => {   
 
-  length > 0 ? gifs = results.map(gif => <GalleryItem url={gif} key={gif.id}/>) : gifs=<NoGifs />
+  const length = pictures.length;
+  let gifs;
+  length > 0 ? gifs = pictures.map(gif => <GalleryItem url={gif} key={gif.id}/>) : gifs=<NoGifs />
   
   return (
+    
     <div className={length > 0 ? "photo-container" : "no-gifs"}>
-    <h2>Search Results: <span>{length > 0 ? props.title: 'none'}</span></h2>
+    <h2><span>{length > 0 ? title: ''}</span></h2>
       <ul>
         {gifs}
       </ul>

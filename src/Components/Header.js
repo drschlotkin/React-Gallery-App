@@ -1,15 +1,19 @@
 import React from 'react';
 import Search from './Search';
+import { withRouter } from 'react-router-dom';
 import Nav from './Nav';
+import Gallery from './Gallery';
 
-const Header = props => (
+const Header = ({title, pictures, history, displayResults}) => (
+  
   <header>
     <h1>DEADLY CREATURES</h1>
-    
     <Nav />
-    <Search onSearch={props}/>
-    
+    <Search history={history} onSearch={(a) => displayResults(a)}/> 
+    <Gallery pictures={pictures} title={title}  /> 
   </header>
+
 );
 
-export default Header;
+export default withRouter(Header);
+
