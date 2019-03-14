@@ -1,33 +1,40 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import Header from './Components/Header';
 import NotFound from './Components/NotFound';
 import key from './Components/config.js';
 
 export default class App extends Component {  
   
-  constructor(){
-    super()
-    this.state = {
-      gifs: [],
-      loading: true,
-      query: ''
-    };
+  // Arrays that will hold pictures from API calls
+  state = {
+    searchResults: [],
+    mosquito: [],
+    jellyfish: [],
+    humans: [],
+    loading: true,
+    title: ''
   };
+ 
 
+  // Initial API calls to set up navigation bar
   componentDidMount() {
     document.body.classList.add('background-image');
-    this.performSearch();  
+    this.performSearch('mosquito','mosquito');  
+    this.performSearch('jellyfish','jellyfish');  
+    this.performSearch('humans','humans');  
   };
 
-  performSearch = (query) => {
+
+  // Get data from server. First variable is the array to fill. Second variable is the search query.
+  performSearch = (arr, query) => {
     fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => response.json())
     .then(responseData => {
       this.setState({
-        gifs: responseData.photos.photo,
+        [arr]: responseData.photos.photo,
         loading: false,
-        query
+        title: query
       });
     })
     .catch(error => {
@@ -36,8 +43,8 @@ export default class App extends Component {
   };
 
 
+  /* Routes for navigation bar and search function. */
   render() {
-    
     return (
       <BrowserRouter>
         <div className="container">
@@ -45,25 +52,24 @@ export default class App extends Component {
           <Route exact path="/" render={() =>  <Redirect to="/mosquito" />}/>       
           
           <Route path="/mosquito" render= {() => 
-            (this.state.loading)
-            ? <h1>Loading...</h1>
-            : <Header title="mosquito" pictures={this.state.gifs} displayResults={this.performSearch('mosquito')}/>
+            <Header title="mosquito" pictures={this.state.mosquito} display={this.performSearch}/>
           }/>
 
           <Route path="/jellyfish" render= {() => 
-            (this.state.loading)
-            ? <h1>Loading...</h1>
-            : <Header title="Jelly Fish" pictures={this.state.gifs} displayResults={this.performSearch('jellyfish')}/>
+            <Header title="jellyfish" pictures={this.state.jellyfish} display={this.performSearch} />
           }/>
 
           <Route path="/humans" render= {() => 
-            (this.state.loading)
-            ? <h1>Loading...</h1>
-            : <Header title="Humans" pictures={this.state.gifs} displayResults={this.performSearch('humans')}/>
+            <Header title="humans" pictures={this.state.humans} display={this.performSearch}/>
           }/>
 
-          <Route path='/search' render={() => 
-            <Header title="Search" pictures={this.state.gifs} displayResults={(query) => this.performSearch(query)}/>
+          <Route path='/search/:id' render={() => 
+            (this.state.loading)
+            ? <h1>Loading...</h1>
+            : <Header title={`Search results: ${this.state.title}`} 
+                pictures={this.state.searchResults} 
+                display={this.performSearch}
+                />
           }/>
         
         <Route component={NotFound} />
@@ -73,4 +79,3 @@ export default class App extends Component {
     );
   };
 };
-

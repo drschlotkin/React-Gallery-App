@@ -1,5 +1,7 @@
 import React from 'react';
 
+// Picture data from <Gallery /> is passed in here and inserted into the <img> tag.
+
 const GalleryItem = props => ( 
   <li>
     <img 

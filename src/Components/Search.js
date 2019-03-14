@@ -1,21 +1,20 @@
 import React, {Component} from 'react';
-import searchIcon from './searchIcon'
-
+import searchIcon from './searchIcon';
 
 export default class Search extends Component {
 
+  /* When user submits search form, the browser URL is updated to reflect the search query and the 
+  search query is passed back to App.js */
+  
   handleSubmit = e => {
     e.preventDefault();
-    let path = `/search?q=${this.query.value}`;
-    
-    console.log(this.props.onSearch(this.query.value))
+    let path = `/search/${this.query.value}`;
+    this.props.onSearch('searchResults', this.query.value);
     e.currentTarget.reset();
     this.props.history.push(path);
-
-  }
+  };
 
   render(){
-    
     return (
       <div>
         <form className ='search-form' onSubmit={this.handleSubmit} >
