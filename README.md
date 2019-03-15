@@ -7,9 +7,9 @@
 * Created with ReactJS by Ewen Earle
 * Main design (HTML and CSS) provided by Team Treehouse
 
-### Before you run this project
+## Before you run this project
 
-## Get a Flickr API key
+### Get a Flickr API key
 
 * Create yahoo account/use tumblr account to sign in.
 * Apply for a non-commercial API key.
@@ -17,6 +17,8 @@
 * The config.js file should look something like this:
   const apiKey = 'YOUR API KEY';
   export default apiKey;
+
+
 
 
 ## Available Scripts
