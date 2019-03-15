@@ -13,7 +13,7 @@
 
 * Create yahoo account/use tumblr account to sign in.
 * Apply for a non-commercial API key.
-* You’ll need to set up a config.js file in your project that imports your API key into your application so that you and other users    can request data from the Flickr API. This file should be stored in src/Components
+* You’ll need to set up a config.js file that imports your API key into your application so that you can request data from the Flickr   API. This file should be stored in src/Components
 * The config.js file should look something like this:
   const apiKey = 'YOUR API KEY';
   export default apiKey;
