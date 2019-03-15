@@ -4,9 +4,11 @@ import Header from './Components/Header';
 import NotFound from './Components/NotFound';
 import key from './Components/config.js';
 
+
 export default class App extends Component {  
   
-  // Arrays that will hold pictures from API calls
+  // Arrays that will hold pictures
+
   state = {
     searchResults: [],
     mosquito: [],
@@ -18,6 +20,7 @@ export default class App extends Component {
  
 
   // Initial API calls to set up navigation bar
+
   componentDidMount() {
     document.body.classList.add('background-image');
     this.performSearch('mosquito','mosquito');  
@@ -27,7 +30,9 @@ export default class App extends Component {
 
 
   // Get data from server. First variable is the array to fill. Second variable is the search query.
+
   performSearch = (arr, query) => {
+    this.setState({loading: true});
     fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${key}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => response.json())
     .then(responseData => {
@@ -42,37 +47,47 @@ export default class App extends Component {
     });
   };
 
+  
+ /* Below are the routes for navigation bar and search function
+ ==============================================================
+ Each component contains the following which will be passed to <Header /> :
 
-  /* Routes for navigation bar and search function. */
+ - loadState: Reponsible for checking if API call has been successful 
+ - pictures: Contains array of picture data
+ - display: Search the API with query string that will be submitted in <Search /> */
+
+ 
   render() {
+    console.log('how many times')
     return (
       <BrowserRouter>
         <div className="container">
         <Switch>
           <Route exact path="/" render={() =>  <Redirect to="/mosquito" />}/>       
-          
-          <Route path="/mosquito" render= {() => 
-            <Header title="mosquito" pictures={this.state.mosquito} display={this.performSearch}/>
-          }/>
 
+          <Route path="/mosquito" render= {() => 
+            <Header title="mosquito" 
+                    pictures={this.state.mosquito} 
+                    display={this.performSearch} 
+                    loadState={this.state.loading}/>}/>
+          
           <Route path="/jellyfish" render= {() => 
-            <Header title="jellyfish" pictures={this.state.jellyfish} display={this.performSearch} />
-          }/>
+            <Header title="jellyfish" 
+                    pictures={this.state.jellyfish} 
+                    display={this.performSearch}/>}/>
 
           <Route path="/humans" render= {() => 
-            <Header title="humans" pictures={this.state.humans} display={this.performSearch}/>
-          }/>
+            <Header title="humans" 
+                    pictures={this.state.humans} 
+                    display={this.performSearch}/>}/>        
 
           <Route path='/search/:id' render={() => 
-            (this.state.loading)
-            ? <h1>Loading...</h1>
-            : <Header title={`Search results: ${this.state.title}`} 
-                pictures={this.state.searchResults} 
-                display={this.performSearch}
-                />
-          }/>
-        
-        <Route component={NotFound} />
+            <Header title={`Search results: ${this.state.title}`} 
+                    pictures={this.state.searchResults} 
+                    display={this.performSearch}
+                    loadState={this.state.loading}/>}/>
+                
+          <Route component={NotFound} />
         </Switch>
         </div>
       </BrowserRouter>

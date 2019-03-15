@@ -1,6 +1,6 @@
 import React from 'react';
 
-// This message will display if gifs match search query
+// This message will display if no gifs match search query
 
 const NoGifs = () =>  (
   <li>

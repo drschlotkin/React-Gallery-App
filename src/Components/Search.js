@@ -4,7 +4,7 @@ import searchIcon from './searchIcon';
 export default class Search extends Component {
 
   /* When user submits search form, the browser URL is updated to reflect the search query and the 
-  search query is passed back to App.js */
+  search query is passed back to <Header /> and then to <App /> */
   
   handleSubmit = e => {
     e.preventDefault();
