@@ -19,9 +19,9 @@ const Gallery = ({pictures, title, loading}) => {
   if (length > 0){
     gifs = pictures.map(gif => <GalleryItem url={gif} key={gif.id}/>)
   }else if(loading){
-    gifs =<h1>Searching...</h1>
+    gifs = <h1>Searching...</h1>
   }else{
-    gifs= <NoGifs />
+    gifs = <NoGifs />
   }
   
   return (

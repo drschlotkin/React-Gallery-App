@@ -4,7 +4,6 @@ import Header from './Components/Header';
 import NotFound from './Components/NotFound';
 import key from './Components/config.js';
 
-
 export default class App extends Component {  
   
   // Arrays that will hold pictures
@@ -58,7 +57,6 @@ export default class App extends Component {
 
  
   render() {
-    console.log('how many times')
     return (
       <BrowserRouter>
         <div className="container">

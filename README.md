@@ -1,11 +1,9 @@
 # React Gallery App
 
-<a href="https://teamtreehouse.com" target="_blank">Team Treehouse</a> Full Stack Techdegree - Project #7
-
 ## Introduction
 
 * Created with ReactJS by Ewen Earle
-* Main design (HTML and CSS) provided by Team Treehouse
+* Visual design provided by Team Treehouse
 
 ## Before you run this project
 
@@ -17,8 +15,6 @@
 * The config.js file should look something like this:
   const apiKey = 'YOUR API KEY';
   export default apiKey;
-
-
 
 
 ## Available Scripts
@@ -86,4 +82,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 ### `npm run build` fails to minify
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-r

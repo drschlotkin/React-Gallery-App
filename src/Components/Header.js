@@ -22,3 +22,4 @@ const Header = ({title, pictures, history, display, loadState}) => {
 };
 
 export default withRouter(Header);
+
