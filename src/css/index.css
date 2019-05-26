@@ -60,7 +60,7 @@ input:focus {
 
 .main-nav a {
   display: block;
-  background: #438bbd;
+  /* background: #438bbd; */
   color: #fff;
   font-size: 20px;
   margin-bottom: 60px;
